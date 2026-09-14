@@ -1,0 +1,20 @@
+## .NET
+bin/
+obj/
+*.user
+.vs/
+.vscode/*
+!.vscode/extensions.json
+
+## Rider / VS
+*.suo
+*.userosscache
+*.sln.docstates
+
+## OS
+.DS_Store
+Thumbs.db
+
+## Secrets / env (never commit these)
+*.env
+appsettings.*.local.json

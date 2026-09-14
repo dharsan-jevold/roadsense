@@ -1,0 +1,52 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.10000.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoadSense.Api", "src\RoadSense.Api\RoadSense.Api.csproj", "{EFA99AB5-9E4B-4B57-831F-FA46C54BE5B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoadSense.Application", "src\RoadSense.Application\RoadSense.Application.csproj", "{D16E4086-136D-4626-AF0A-1DC62E6FA56C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoadSense.Domain", "src\RoadSense.Domain\RoadSense.Domain.csproj", "{0A7E359C-00A7-4B3D-AD8A-1FBB3E3529D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoadSense.Infrastructure", "src\RoadSense.Infrastructure\RoadSense.Infrastructure.csproj", "{C5393479-9248-4592-9FDD-D31AE0C54D50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoadSense.UnitTests", "tests\RoadSense.UnitTests\RoadSense.UnitTests.csproj", "{E013CFF2-AC54-45A9-8591-750A66F23240}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoadSense.IntegrationTests", "tests\RoadSense.IntegrationTests\RoadSense.IntegrationTests.csproj", "{AA96F457-B4CC-4D25-8768-D0977FEBA114}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EFA99AB5-9E4B-4B57-831F-FA46C54BE5B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFA99AB5-9E4B-4B57-831F-FA46C54BE5B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFA99AB5-9E4B-4B57-831F-FA46C54BE5B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFA99AB5-9E4B-4B57-831F-FA46C54BE5B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D16E4086-136D-4626-AF0A-1DC62E6FA56C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D16E4086-136D-4626-AF0A-1DC62E6FA56C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D16E4086-136D-4626-AF0A-1DC62E6FA56C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D16E4086-136D-4626-AF0A-1DC62E6FA56C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A7E359C-00A7-4B3D-AD8A-1FBB3E3529D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A7E359C-00A7-4B3D-AD8A-1FBB3E3529D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A7E359C-00A7-4B3D-AD8A-1FBB3E3529D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A7E359C-00A7-4B3D-AD8A-1FBB3E3529D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5393479-9248-4592-9FDD-D31AE0C54D50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5393479-9248-4592-9FDD-D31AE0C54D50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5393479-9248-4592-9FDD-D31AE0C54D50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5393479-9248-4592-9FDD-D31AE0C54D50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E013CFF2-AC54-45A9-8591-750A66F23240}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E013CFF2-AC54-45A9-8591-750A66F23240}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E013CFF2-AC54-45A9-8591-750A66F23240}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E013CFF2-AC54-45A9-8591-750A66F23240}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA96F457-B4CC-4D25-8768-D0977FEBA114}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA96F457-B4CC-4D25-8768-D0977FEBA114}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA96F457-B4CC-4D25-8768-D0977FEBA114}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA96F457-B4CC-4D25-8768-D0977FEBA114}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

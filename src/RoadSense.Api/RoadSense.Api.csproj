@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>roadsense-api-secrets</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.12" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RoadSense.Application\RoadSense.Application.csproj" />
+    <ProjectReference Include="..\RoadSense.Domain\RoadSense.Domain.csproj" />
+    <ProjectReference Include="..\RoadSense.Infrastructure\RoadSense.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
