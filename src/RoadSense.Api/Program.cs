@@ -1,23 +1,34 @@
+using Microsoft.EntityFrameworkCore;
+using RoadSense.Api.Hubs;
+using RoadSense.Application.Repositories;
 using RoadSense.Application.Services;
+using RoadSense.Infrastructure.Data;
+using RoadSense.Infrastructure.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Controllers: business logic lives in Application/Domain, controllers stay thin.
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.Converters.Add(
             new System.Text.Json.Serialization.JsonStringEnumConverter());
     });
-builder.Services.AddSingleton<IHazardService, HazardService>();
-// OpenAPI document generation (built into the ASP.NET Core templates on .NET 10).
-builder.Services.AddOpenApi();
 
-// Application / Infrastructure service registrations will be added here
-// starting Phase 2, via extension methods such as:
-//   builder.Services.AddApplicationServices();
-//   builder.Services.AddInfrastructureServices(builder.Configuration);
-// Keeping Program.cs free of ad-hoc registrations now avoids it becoming
-// a dumping ground later.
+builder.Services.AddScoped<IHazardService, HazardService>();
+builder.Services.AddScoped<IHazardRepository, HazardRepository>();
+
+builder.Services.AddDbContext<RoadSenseDbContext>(options =>
+    options.UseNpgsql(
+        builder.Configuration.GetConnectionString("RoadSenseDb"),
+        npgsqlOptions =>
+        {
+            npgsqlOptions.UseNetTopologySuite();
+        }));
+
+// SignalR for real-time hazard communication.
+builder.Services.AddSignalR();
+
+builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
@@ -28,6 +39,14 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
+
 app.MapControllers();
 
+// Real-time hazard communication endpoint.
+app.MapHub<HazardHub>("/hubs/hazards");
+
 app.Run();
+
+public partial class Program
+{
+}

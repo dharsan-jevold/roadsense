@@ -4,11 +4,16 @@ namespace RoadSense.Application.Services;
 
 public interface IHazardService
 {
-    Hazard CreateHazard(
+    Task<Hazard> CreateHazardAsync(
         HazardType type,
         double latitude,
         double longitude,
         int severity);
 
-    Hazard? GetHazard(Guid id);
+    Task<Hazard?> GetHazardAsync(Guid id);
+
+    Task<IReadOnlyList<Hazard>> GetNearbyHazardsAsync(
+        double latitude,
+        double longitude,
+        double radiusMeters);
 }

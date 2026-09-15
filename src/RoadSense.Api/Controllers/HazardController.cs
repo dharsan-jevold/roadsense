@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using RoadSense.Api.DTOs;
 using RoadSense.Application.Services;
 using RoadSense.Domain.Entities;
 
@@ -16,7 +17,7 @@ public class HazardController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult ReportHazard(
+    public async Task<IActionResult> ReportHazard(
         [FromBody] ReportHazardRequest request)
     {
         if (!Enum.IsDefined(request.Type))
@@ -51,21 +52,23 @@ public class HazardController : ControllerBase
             });
         }
 
-        var hazard = _hazardService.CreateHazard(
+        var hazard = await _hazardService.CreateHazardAsync(
             request.Type,
             request.Latitude,
             request.Longitude,
             request.Severity);
 
+        var response = ToResponse(hazard);
+
         return Created(
             $"/api/hazard/{hazard.Id}",
-            hazard);
+            response);
     }
 
     [HttpGet("{id:guid}")]
-    public IActionResult GetHazard(Guid id)
+    public async Task<IActionResult> GetHazard(Guid id)
     {
-        var hazard = _hazardService.GetHazard(id);
+        var hazard = await _hazardService.GetHazardAsync(id);
 
         if (hazard is null)
         {
@@ -75,12 +78,65 @@ public class HazardController : ControllerBase
             });
         }
 
-        return Ok(hazard);
+        return Ok(ToResponse(hazard));
     }
-}
 
-public record ReportHazardRequest(
-    HazardType Type,
-    double Latitude,
-    double Longitude,
-    int Severity);
+    [HttpGet("nearby")]
+    public async Task<IActionResult> GetNearbyHazards(
+        [FromQuery] double latitude,
+        [FromQuery] double longitude,
+        [FromQuery] double radiusMeters = 1000)
+    {
+        if (latitude < -90 || latitude > 90)
+        {
+            return BadRequest(new
+            {
+                error = "Latitude must be between -90 and 90."
+            });
+        }
+
+        if (longitude < -180 || longitude > 180)
+        {
+            return BadRequest(new
+            {
+                error = "Longitude must be between -180 and 180."
+            });
+        }
+
+        if (radiusMeters <= 0)
+        {
+            return BadRequest(new
+            {
+                error = "Radius must be greater than 0."
+            });
+        }
+
+        var hazards = await _hazardService.GetNearbyHazardsAsync(
+            latitude,
+            longitude,
+            radiusMeters);
+
+        var response = hazards
+            .Select(ToResponse)
+            .ToList();
+
+        return Ok(response);
+    }
+
+    private static HazardResponse ToResponse(Hazard hazard)
+{
+    var now = DateTime.UtcNow;
+
+    return new HazardResponse(
+        hazard.Id,
+        hazard.Type,
+        hazard.Latitude,
+        hazard.Longitude,
+        hazard.Severity,
+        hazard.ReportCount,
+        hazard.GetConfidenceScore(now),
+        hazard.GetConfidenceLevel(now),
+        hazard.ReportedAtUtc,
+        hazard.LastReportedAtUtc);
+}
+}
